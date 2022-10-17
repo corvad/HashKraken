@@ -12,6 +12,7 @@
 - Rainbow Tables (Creation and Usage)
 - Written in Java
 - Top 14 Million Passwords Built In
+- Ability to Add Custom Wordlists
 - Brute Force
 - Random Text Mode
 - Auto-Caches Previous Runs
