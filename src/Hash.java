@@ -8,13 +8,14 @@ public class Hash<priavte> {
     private String hash;
     private int threads;
     private String[] possible;
-    private rainbow
+    private boolean CreateHashMap;
     private HashMap<String,String> rainbow = new HashMap<>();
 
-    public Hash(String hash, int threads, String path){
+    public Hash(String hash, int threads, String path, boolean CreateHashMap){
         this.path = path;
         this.threads = threads;
         this.hash = hash;
+        this.CreateHashMap = CreateHashMap;
         fileRead();
     }
 
@@ -31,9 +32,8 @@ public class Hash<priavte> {
         }
     }
 
-    public String start(){
+    public void start(){
         // Create New Hashing Threads.
-
     }
 
     public void stop(){

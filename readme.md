@@ -1,6 +1,6 @@
 # HashKraken
 ## By: David Corvaglia
-### A password cracker with a GUI and CLI written in Java.
+### A password cracker written in Java (JDK 17 LTS)
 ## Supported Alogrithms:
 - MD1
 - MD2
@@ -15,7 +15,7 @@
 - yescrypt
 ## Features:
 - Mutithreading
-- GUI and CLI
+- CLI
 - Rainbow Tables (Creation and Usage)
 - Written in Java
 - Top 14 Million Passwords Built In
