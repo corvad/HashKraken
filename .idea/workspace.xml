@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2487fb16-a48e-4c10-9aa8-875adb1a53ae" name="Changes" comment="Test">
-      <change afterPath="$PROJECT_DIR$/src/HashKraken.java" afterDir="false" />
+    <list default="true" id="2487fb16-a48e-4c10-9aa8-875adb1a53ae" name="Changes" comment="Started to Expirment With CMD arguments.&#10;Took away GUI.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Hash.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hash.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MD5Hash.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MD5Hash.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +37,8 @@
   </component>
   <component name="RunManager">
     <configuration name="HashKraken" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="$USER_HOME$/.jdks/corretto-17.0.5" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="HashKraken" />
       <module name="HashKraken" />
       <method v="2">
@@ -104,7 +102,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667574521995</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Started to Expirment With CMD arguments.&#10;Took away GUI.">
+      <created>1667838926589</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1667838926589</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -124,6 +129,7 @@
     <MESSAGE value="Added more project constraints" />
     <MESSAGE value="Reading in array" />
     <MESSAGE value="Test" />
-    <option name="LAST_COMMIT_MESSAGE" value="Test" />
+    <MESSAGE value="Started to Expirment With CMD arguments.&#10;Took away GUI." />
+    <option name="LAST_COMMIT_MESSAGE" value="Started to Expirment With CMD arguments.&#10;Took away GUI." />
   </component>
 </project>
