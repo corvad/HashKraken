@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2487fb16-a48e-4c10-9aa8-875adb1a53ae" name="Changes" comment="Started to Expirment With CMD arguments.&#10;Took away GUI.">
+    <list default="true" id="2487fb16-a48e-4c10-9aa8-875adb1a53ae" name="Changes" comment="Changed JDK Version to 17 from 13">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HashKraken.iml" beforeDir="false" afterPath="$PROJECT_DIR$/HashKraken.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Hash.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hash.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/HashKraken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HashKraken.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MD5Hash.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MD5Hash.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +37,9 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RunManager">
@@ -109,7 +116,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667838926589</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Changed JDK Version to 17 from 13">
+      <created>1667839624562</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1667839624562</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -130,6 +144,7 @@
     <MESSAGE value="Reading in array" />
     <MESSAGE value="Test" />
     <MESSAGE value="Started to Expirment With CMD arguments.&#10;Took away GUI." />
-    <option name="LAST_COMMIT_MESSAGE" value="Started to Expirment With CMD arguments.&#10;Took away GUI." />
+    <MESSAGE value="Changed JDK Version to 17 from 13" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed JDK Version to 17 from 13" />
   </component>
 </project>

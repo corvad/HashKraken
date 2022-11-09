@@ -1,12 +1,18 @@
+import javax.security.auth.login.CredentialException;
+
 public class MD5Hash extends Hash{
 
-    public MD5Hash(String hash, int threads, String path, boolean CreateHashMap) {
-        super(hash, threads, path, CreateHashMap);
+    public MD5Hash(String hash, int threads, String path, boolean createHashMap) {
+        super(hash, threads, path, createHashMap);
     }
 
-    public void start(){
+    public void startHash(){
         super.start();
     }
 
+    public void hashAlgorithm(int min, int max){
+        // Algorithm of MD5 Goes Here
+
+    }
 
 }

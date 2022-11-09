@@ -1,19 +1,22 @@
 import java.util.Arrays;
+import java.util.Locale;
 
 public class HashKraken {
 
+    // Program Starts Here
     public static void main(String[] args){
-        // Check CMD arguments
-
-
-        if(args[0].equals("--help") || args[0].equals("--h")){
-            // Add Later
+        // Check CMD Arguments
+        if(args[0].toLowerCase().equals("--help") || args[0].toLowerCase().equals("-h")){
+            // Display Help Message
         }
+        else if(args[0].equals("")){
 
-        System.out.println(Arrays.toString(args));
+        }
+        else{
+            // Display Message to Access Help.
 
-
-
-
+            // Stop Execution of Program
+            System.exit(0);
+        }
     }
 }

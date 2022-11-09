@@ -8,14 +8,14 @@ public class Hash<priavte> {
     private String hash;
     private int threads;
     private String[] possible;
-    private boolean CreateHashMap;
+    private boolean createHashMap;
     private HashMap<String,String> rainbow = new HashMap<>();
 
-    public Hash(String hash, int threads, String path, boolean CreateHashMap){
+    public Hash(String hash, int threads, String path, boolean createHashMap){
         this.path = path;
         this.threads = threads;
         this.hash = hash;
-        this.CreateHashMap = CreateHashMap;
+        this.createHashMap = createHashMap;
         fileRead();
     }
 
@@ -33,12 +33,24 @@ public class Hash<priavte> {
     }
 
     public void start(){
-        // Create New Hashing Threads.
+        // Check If Hashmap Dictionary For Hash Algorithm Exists
+
+        // Start Threads to Hash Passwords and Split Array Indexes Into Equal Parts
+
+        for(int x=0; x<threads;x++){
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    hashAlgorithm((),(possible.length));
+                }
+            });
+        }
     }
 
     public void stop(){
-        // Stop all threads.
-
+        // Stops Program Execution
+        System.exit(0);
     }
 
 
