@@ -3,7 +3,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
 
-public class Hash<priavte> {
+public class Hash{
     private String path;
     private String hash;
     private int threads;
@@ -36,13 +36,19 @@ public class Hash<priavte> {
         // Check If Hashmap Dictionary For Hash Algorithm Exists
 
         // Start Threads to Hash Passwords and Split Array Indexes Into Equal Parts
-
+        int max = possible.length-1;
+        int lengths = max/threads;
+        int indexMax = lengths;
+        int indexMin = 0;
         for(int x=0; x<threads;x++){
-
+            indexMax+=lengths;
+            indexMin+=lengths+1;
+            int finalIndexMin = indexMin;
+            int finalIndexMax = indexMax;
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    hashAlgorithm((),(possible.length));
+                    hashAlgorithm(finalIndexMin, finalIndexMax);
                 }
             });
         }
