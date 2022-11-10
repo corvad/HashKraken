@@ -45,11 +45,8 @@ public class Hash{
             indexMin+=lengths+1;
             int finalIndexMin = indexMin;
             int finalIndexMax = indexMax;
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    hashAlgorithm(finalIndexMin, finalIndexMax);
-                }
+            new Thread(() -> {
+                hashAlgorithm(finalIndexMin, finalIndexMax);
             });
         }
     }
@@ -59,5 +56,9 @@ public class Hash{
         System.exit(0);
     }
 
+    private void hashAlgorithm(int min, int max){
+        // Placeholder For Hash Class
+
+    }
 
 }
