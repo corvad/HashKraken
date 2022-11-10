@@ -19,11 +19,16 @@ public class MD5Hash extends Hash{
             String MD5Hash = MD5Hex.formatHex(MD5Bytes);
             if(MD5Hash.equals(hash)){
                 System.out.println("Found Password: " + possible[x]);
-                stop();
+                if(!createHashMap){
+                    stop();
+                }
+            }
+            if(createHashMap){
+                rainbow.put(possible[x],MD5Hash);
             }
         }
+        finished.countDown();
         System.out.println(Thread.currentThread().getName() + " Finished Hashing");
-
     }
 
     public static boolean checkHash(String hash){
