@@ -6,6 +6,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.HexFormat;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -14,8 +15,8 @@ public class Hash{
     protected String hash;
     private int threads;
     protected String[] possible;
-    private boolean createHashMap;
-
+    protected boolean createHashMap;
+    protected CountDownLatch finished;
     private HashMap<String,String> rainbow = new HashMap<>();
 
 
@@ -25,6 +26,7 @@ public class Hash{
         this.threads = threads;
         this.hash = hash;
         this.createHashMap = createHashMap;
+        finished = new CountDownLatch(threads);
         fileRead();
     }
 
@@ -44,7 +46,7 @@ public class Hash{
         }
     }
 
-    public void start(){
+    public void start() throws InterruptedException {
         // Check If Hashmap Dictionary For Hash Algorithm Exists
         // Start Threads to Hash Passwords and Split Array Indexes Into Equal Parts
         int max = possible.length-1;
@@ -66,7 +68,11 @@ public class Hash{
                 }
             }).start();
         }
-
+        finished.await();
+        System.out.println("No Password Found!");
+        if(createHashMap){
+            System.out.println("Hashmap has been created.");
+        }
     }
 
     public void stop(){
