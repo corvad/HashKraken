@@ -18,7 +18,7 @@
 - CLI
 - Rainbow Tables (Creation and Usage)
 - Written in Java
-- Top 14 Million Passwords Built In
+- Top 10 Million Passwords Built In
 - Ability to Add Custom Wordlists or Dictionaries
 - Brute Force Password Cracking
 - Auto-Caches Previous Runs
