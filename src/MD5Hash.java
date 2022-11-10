@@ -9,9 +9,9 @@ public class MD5Hash extends Hash{
         super(hash, threads, path, createHashMap);
     }
 
-    private void hashAlgorithm(int min, int max) throws NoSuchAlgorithmException {
+    protected void hashAlgorithm(int min, int max) throws NoSuchAlgorithmException {
         // Algorithm of MD5 Goes Here
-        System.out.println("Right One");
+        System.out.println(Thread.currentThread().getName() + " Started Hashing");
         for(int x=min;x<=max;x++){
             MessageDigest MD5 = MessageDigest.getInstance("MD5");
             byte[] MD5Bytes = MD5.digest(possible[x].getBytes(StandardCharsets.UTF_8));
@@ -22,11 +22,26 @@ public class MD5Hash extends Hash{
                 stop();
             }
         }
+        System.out.println(Thread.currentThread().getName() + " Finished Hashing");
 
     }
 
-    private void h(){
-        System.out.println("Inheritance is good.");
+    public static boolean checkHash(String hash){
+        hash = hash.toUpperCase();
+        if(hash.length()!=32){
+            return false;
+        }
+        else{
+            for(int x=0;x<hash.length();x++){
+                if(!(hash.charAt(x) == 'A' || hash.charAt(x) == 'B' || hash.charAt(x) == 'C' || hash.charAt(x) == 'D' || hash.charAt(x) == 'E' || hash.charAt(x) == 'F' || hash.charAt(x) == '0' || hash.charAt(x) == '1' || hash.charAt(x) == '2' || hash.charAt(x) == '3' || hash.charAt(x) == '4' || hash.charAt(x) == '5' || hash.charAt(x) == '6' || hash.charAt(x) == '7' || hash.charAt(x) == '8' || hash.charAt(x) == '9')){
+                    // Do nothing.
+                }
+                else{
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 
 }

@@ -1,6 +1,3 @@
-import java.util.Arrays;
-import java.util.Locale;
-
 public class HashKraken {
 
     // Program Starts Here
@@ -31,8 +28,7 @@ public class HashKraken {
             }
         }
         */
-        MD5Hash a = new MD5Hash("asdasd",4,"C:\\Users\\mainuser\\Downloads\\a.txt",true);
+        MD5Hash a = new MD5Hash("aa84c94a7cf9b26038adcccd8b0fd0a1",8,"C:\\Users\\100031399\\Downloads\\HashKraken\\src\\rockyou.txt",true);
         a.start();
-
     }
 }
