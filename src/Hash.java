@@ -35,9 +35,12 @@ public class Hash{
     private void fileRead(){
         // Read Dictionary into Memory.
         try {
-            possible = Files.readAllLines(Paths.get(path)).toArray(new String[0]);
+            System.out.println("Reading wordList into memory; This may take a few moments.");
+            possible = Files.readAllLines(Paths.get(path),StandardCharsets.ISO_8859_1).toArray(new String[0]);
         } catch (IOException e) {
             e.printStackTrace();
+            System.out.println("Error encountered while reading wordlist.");
+            error();
         }
     }
 
@@ -66,14 +69,18 @@ public class Hash{
 
     }
 
-
-    private void hashAlgorithm(int min, int max) throws NoSuchAlgorithmException {
-        System.out.println("Hello");
+    public void stop(){
+        // Stops Program Execution with Normal Code
+        System.exit(0);
     }
 
-    public void stop(){
-        // Stops Program Execution
-        System.exit(0);
+    public void error(){
+        // Stops Program Execution with Error Code
+        System.exit(1);
+    }
+
+    protected void hashAlgorithm(int finalIndexMin, int finalIndexMax) throws NoSuchAlgorithmException {
+        hashAlgorithm(finalIndexMin, finalIndexMax);
     }
 
 }
