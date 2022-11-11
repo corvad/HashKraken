@@ -16,10 +16,8 @@
 ## Features:
 - Mutithreading
 - CLI
-- Rainbow Tables (Creation and Usage)
 - Written in Java
 - Top 10 Million Passwords Built In
 - Ability to Add Custom Wordlists or Dictionaries
 - Brute Force Password Cracking
-- Auto-Caches Previous Runs
 ## Usage:

@@ -1,29 +1,22 @@
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.HashMap;
-import java.util.HexFormat;
+import java.util.Hashtable;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
-public class Hash{
+public class Hash {
     private String path;
     protected String hash;
     private int threads;
     protected String[] possible;
-    protected boolean createHashMap;
     protected CountDownLatch finished;
-    protected HashMap<String,String> rainbow = new HashMap<>();
 
-    public Hash(String hash, int threads, String path, boolean createHashMap){
+    public Hash(String hash, int threads, String path) {
         this.path = path;
         this.threads = threads;
         this.hash = hash;
-        this.createHashMap = createHashMap;
         finished = new CountDownLatch(threads);
         fileRead();
     }
@@ -32,87 +25,55 @@ public class Hash{
         return path;
     }
 
-    private void fileRead(){
+    private void fileRead() {
         // Read Dictionary into Memory.
         try {
             System.out.println("Reading dictionary into memory; This may take a few moments.");
-            possible = Files.readAllLines(Paths.get(path),StandardCharsets.ISO_8859_1).toArray(new String[0]);
+            possible = Files.readAllLines(Paths.get(path), StandardCharsets.ISO_8859_1).toArray(new String[0]);
         } catch (IOException e) {
-            e.printStackTrace();
             System.out.println("Error encountered while reading wordlist.");
             error();
         }
     }
 
-    public void start() throws InterruptedException {
-        // Check If Hashmap Dictionary For Hash Algorithm Exists
-        if(true){
-
-            loadRainbowTable();
-            findInRainbowTable();
+    public void start() {
+        // Split Array into Multiple Parts and Start Threads.
+        int max = possible.length - 1;
+        int lengths = max / threads;
+        int indexMax = lengths;
+        int indexMin = 0;
+        for (int x = 0; x < threads; x++) {
+            if (x != 0) {
+                indexMax += lengths;
+                indexMin += lengths + 1;
+            }
+            int finalIndexMin = indexMin;
+            int finalIndexMax = indexMax;
+            new Thread(() -> {
+                hashAlgorithm(finalIndexMin, finalIndexMax, lengths);
+            }).start();
         }
-        else{
-            if(createHashMap){
-
-            }
-            // Start Threads to Hash Passwords and Split Array Indexes Into Equal Parts
-            int max = possible.length-1;
-            int lengths = max/threads;
-            int indexMax = lengths;
-            int indexMin = 0;
-            for(int x=0; x<threads;x++){
-                if(x!=0){
-                    indexMax+=lengths;
-                    indexMin+=lengths+1;
-                }
-                int finalIndexMin = indexMin;
-                int finalIndexMax = indexMax;
-                new Thread(() -> {
-                    try {
-                        hashAlgorithm(finalIndexMin, finalIndexMax);
-                    } catch (NoSuchAlgorithmException e) {
-                        throw new RuntimeException(e);
-                    }
-                }).start();
-            }
+        try {
             finished.await();
-            System.out.println("No Password Found!");
-            if(createHashMap){
-                // Save HashMap
-                saveRainbowTable();
-                System.out.println("Hashmap has been created.");
-            }
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
+        System.out.println("No Password Found!");
 
     }
 
-    // Find Hash in Rainbow Table
-    private void findInRainbowTable() {
-
-    }
-
-    // Load Rainbow Table File from .hk file
-    private void loadRainbowTable() {
-
-    }
-
-    // Saves Rainbow Table to File for Future Use (.hk)
-    private void saveRainbowTable() {
-
-    }
-
-    public void stop(){
+    public void stop() {
         // Stops Program Execution with Normal Code
         System.exit(0);
     }
 
-    public void error(){
+    public void error() {
         // Stops Program Execution with Error Code
         System.exit(1);
     }
 
-    protected void hashAlgorithm(int finalIndexMin, int finalIndexMax) throws NoSuchAlgorithmException {
-        hashAlgorithm(finalIndexMin, finalIndexMax);
+    protected void hashAlgorithm(int finalIndexMin, int finalIndexMax, int lengths) {
+        hashAlgorithm(finalIndexMin, finalIndexMax, lengths);
     }
 
 }
