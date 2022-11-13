@@ -9,17 +9,24 @@ public class MD5Hash extends Hash {
         super(hash, threads, path);
     }
 
-    protected void hashAlgorithm(int min, int max, int lengths) {
+    protected void hashAlgorithm(int min, int max) {
         // Algorithm of MD5 Goes Here
         System.out.println(Thread.currentThread().getName() + " Started Hashing");
+        boolean twentyfive = false;
+        boolean fifty = false;
+        boolean seventyfive = false;
         for (int x = min; x <= max; x++) {
-            if(x==lengths*.25){
+            int percent = (int) (((x - (min * 1.0)) / (max - min)) * 100);
+            if(percent == 25 && !twentyfive){
+                twentyfive = true;
                 System.out.println(Thread.currentThread().getName() + " 25% Done Hashing");
             }
-            if(x==lengths*.5){
+            if(percent == 50 && !fifty){
+                fifty = true;
                 System.out.println(Thread.currentThread().getName() + " 50% Done Hashing");
             }
-            if(x==lengths*.75){
+            if(percent == 75 && !seventyfive){
+                seventyfive = true;
                 System.out.println(Thread.currentThread().getName() + " 75% Done Hashing");
             }
             MessageDigest MD5 = null;

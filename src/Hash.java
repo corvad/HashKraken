@@ -2,8 +2,6 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.security.NoSuchAlgorithmException;
-import java.util.Hashtable;
 import java.util.concurrent.CountDownLatch;
 
 public class Hash {
@@ -50,7 +48,7 @@ public class Hash {
             int finalIndexMin = indexMin;
             int finalIndexMax = indexMax;
             new Thread(() -> {
-                hashAlgorithm(finalIndexMin, finalIndexMax, lengths);
+                hashAlgorithm(finalIndexMin, finalIndexMax);
             }).start();
         }
         try {
@@ -72,8 +70,8 @@ public class Hash {
         System.exit(1);
     }
 
-    protected void hashAlgorithm(int finalIndexMin, int finalIndexMax, int lengths) {
-        hashAlgorithm(finalIndexMin, finalIndexMax, lengths);
+    protected void hashAlgorithm(int finalIndexMin, int finalIndexMax) {
+        hashAlgorithm(finalIndexMin, finalIndexMax);
     }
 
 }
