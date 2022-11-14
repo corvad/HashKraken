@@ -3,7 +3,7 @@ import java.io.IOException;
 public class HashKraken {
 
     // Program Starts Here
-    public static void main(String[] args) throws InterruptedException, IOException, ClassNotFoundException {
+    public static void main(String[] args) {
         /*
         String helpMessage = "This will be a help message";
 
@@ -30,7 +30,7 @@ public class HashKraken {
             }
         }
         */
-        MD5Hash a = new MD5Hash("aa84c94a7cf9b26038adcccd8b0fd0a1", 8, "C:\\Users\\mainuser\\Desktop\\HashKraken\\src\\Top-10-Million.txt");
+        MD5Hash a = new MD5Hash("3a170d0d80ff7927834d61a4a38b870b", 8, "C:\\Users\\100031399\\Downloads\\HashKraken\\src\\Top-10-Million.txt");
         a.start();
     }
 }
