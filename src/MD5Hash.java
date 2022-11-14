@@ -44,7 +44,7 @@ public class MD5Hash extends Hash {
                 System.out.println(Thread.currentThread().getName() + " 75% Done Hashing");
             }
             //hash and compare
-            MessageDigest MD5 = null;
+            MessageDigest MD5;
             try {
                 MD5 = MessageDigest.getInstance("MD5");
             } catch (NoSuchAlgorithmException e) {

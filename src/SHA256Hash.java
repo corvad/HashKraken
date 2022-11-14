@@ -44,7 +44,7 @@ public class SHA256Hash extends Hash {
                 System.out.println(Thread.currentThread().getName() + " 75% Done Hashing");
             }
             //hash and compare
-            MessageDigest SHA256 = null;
+            MessageDigest SHA256;
             try {
                 SHA256 = MessageDigest.getInstance("SHA-256");
             } catch (NoSuchAlgorithmException e) {
