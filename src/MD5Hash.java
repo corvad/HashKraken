@@ -28,7 +28,7 @@ public class MD5Hash extends Hash {
         boolean seventyfive = false;
         //loop through Sub-Array
         for (int x = min; x <= max && !found; x++) {
-            //save Current percent
+            //save current percent
             int percent = (int) (((x - (min * 1.0)) / (max - min)) * 100);
             //print progress
             if(percent == 25 && !twentyfive){
@@ -72,7 +72,7 @@ public class MD5Hash extends Hash {
      * @return Validity of the MD5 Hash.
      */
     public static boolean checkHash(String hash) {
-        //verify MD5Hash length and format
+        //verify MD5 Hash length and format
         hash = hash.toUpperCase();
         if (hash.length() != 32) {
             return false;

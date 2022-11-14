@@ -30,7 +30,7 @@ public class HashKraken {
             }
         }
         */
-        MD5Hash a = new MD5Hash("3a170d0d80ff7927834d61a4a38b870b", 8, "C:\\Users\\100031399\\Downloads\\HashKraken\\src\\Top-10-Million.txt");
+        SHA256Hash a = new SHA256Hash("b9c950640e1b3740e98acb93e669c65766f6670dd1609ba91ff41052ba48c6f3", 8, "C:\\Users\\100031399\\Downloads\\HashKraken\\src\\Top-10-Million.txt");
         a.start();
     }
 }
