@@ -30,7 +30,7 @@ public class HashKraken {
             }
         }
         */
-        SHA256Hash a = new SHA256Hash("b9c950640e1b3740e98acb93e669c65766f6670dd1609ba91ff41052ba48c6f3", 8, "C:\\Users\\100031399\\Downloads\\HashKraken\\src\\Top-10-Million.txt");
+        BcryptHash a = new BcryptHash("$2a$10$e4cLgi75NJe2ILigAywIbexGYdIBhDowwD7tDf8.YP/.wucev60ca", 8, "C:\\Users\\100031399\\Downloads\\HashKraken\\src\\Top-10-Million.txt");
         a.start();
     }
 }

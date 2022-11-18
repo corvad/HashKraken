@@ -20,4 +20,7 @@
 - Top 10 Million Passwords Built In
 - Ability to Add Custom Wordlists or Dictionaries
 - Brute Force Password Cracking
+## Dependencies
+- Java JDK 17 LTS
+- Maven: Spring Framework Security Crypto
 ## Usage:

@@ -1,23 +1,22 @@
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.HexFormat;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class SHA256Hash extends Hash {
+public class BcryptHash extends Hash {
 
     /**
-     * Constructor for the SHA256Hash Class.
-     * @param hash SHA-256 Hash to Crack
+     * Constructor for the BcryptHash Class.
+     * @param hash Bcrypt Hash to Crack
      * @param threads Number of Threads
      * @param path Path to Wordlist
      */
-    public SHA256Hash(String hash, int threads, String path) {
+    public BcryptHash(String hash, int threads, String path) {
         //call parent class constructor
         super(hash, threads, path);
     }
 
     /**
-     * Method to calculate SHA-256 Hash with concurrency.
+     * Method to calculate Bcrypt Hash with concurrency.
      * @param min Min Index Present in Sub-Array Section
      * @param max Max Index Present in Sub-Array Section
      */
@@ -44,16 +43,7 @@ public class SHA256Hash extends Hash {
                 System.out.println(Thread.currentThread().getName() + " 75% Done Hashing");
             }
             //hash and compare
-            MessageDigest SHA256;
-            try {
-                SHA256 = MessageDigest.getInstance("SHA-256");
-            } catch (NoSuchAlgorithmException e) {
-                throw new RuntimeException(e);
-            }
-            byte[] SHA256Bytes = SHA256.digest(possible[x].getBytes(StandardCharsets.UTF_8));
-            HexFormat SHA256Hex = HexFormat.of();
-            String SHA256Hash = SHA256Hex.formatHex(SHA256Bytes);
-            if (SHA256Hash.equals(hash)) {
+            if (BCrypt.checkpw(possible[x],hash)) {
                 System.out.println("Found Password: " + possible[x]);
                 found = true;
                 stop();
@@ -67,23 +57,16 @@ public class SHA256Hash extends Hash {
     }
 
     /**
-     * Static method to validate the hash style for SHA-256.
-     * @param hash SHA-256 Hash to check.
-     * @return Validity of the SHA-256 Hash.
+     * Static method to validate the hash style for Bcrypt.
+     * @param hash Bcrypt Hash to check.
+     * @return Validity of the Bcrypt Hash.
      */
     public static boolean checkHash(String hash) {
-        //verify SHA-256 hash length and format
+        //verify Bcrypt hash length and format
         hash = hash.toUpperCase();
-        if (hash.length() != 64) {
-            return false;
-        } else {
-            for (int x = 0; x < hash.length(); x++) {
-                if (!(hash.charAt(x) == 'A' || hash.charAt(x) == 'B' || hash.charAt(x) == 'C' || hash.charAt(x) == 'D' || hash.charAt(x) == 'E' || hash.charAt(x) == 'F' || hash.charAt(x) == '0' || hash.charAt(x) == '1' || hash.charAt(x) == '2' || hash.charAt(x) == '3' || hash.charAt(x) == '4' || hash.charAt(x) == '5' || hash.charAt(x) == '6' || hash.charAt(x) == '7' || hash.charAt(x) == '8' || hash.charAt(x) == '9')) {
-                    return false;
-                }
-            }
-            return true;
-        }
+        Pattern pattern = Pattern.compile("^\\$2[ayb]\\$.{56}$");
+        Matcher matcher = M
+
     }
 
 }

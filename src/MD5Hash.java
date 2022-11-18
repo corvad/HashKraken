@@ -72,7 +72,7 @@ public class MD5Hash extends Hash {
      * @return Validity of the MD5 Hash.
      */
     public static boolean checkHash(String hash) {
-        //verify MD5 Hash length and format
+        //verify MD5 hash length and format
         hash = hash.toUpperCase();
         if (hash.length() != 32) {
             return false;
