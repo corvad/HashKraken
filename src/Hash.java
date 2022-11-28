@@ -18,15 +18,57 @@ public class Hash {
      * @param hash Hash to Crack
      * @param threads Number of Threads
      * @param path Path to Wordlist
+     * @param dictionary
+     * @param brute
      */
-    public Hash(String hash, int threads, String path) {
+    public Hash(String hash, int threads, String path, boolean dictionary, boolean brute) {
         this.path = path;
         this.threads = threads;
         this.hash = hash;
         finished = new CountDownLatch(threads);
         found = false;
-        fileRead();
+        brute = true;
+
+        if(brute){
+            genBruteList();
+        }
+        else if(dictionary){
+            fileRead();
+        }else{
+            builtinRead();
+        }
     }
+
+    /**
+     * Read in the dictionary file into an array.
+     */
+    private void genBruteList() {
+        //read dictionary into memory
+        try {
+            System.out.println("Reading dictionary into memory; This may take a few moments.");
+            possible = Files.readAllLines(Paths.get(path), StandardCharsets.ISO_8859_1).toArray(new String[0]);
+        } catch (IOException e) {
+            System.out.println("Error encountered while reading wordlist.");
+            error();
+        }
+    }
+
+    /**
+     * Read in the dictionary file into an array.
+     */
+
+    private void builtinRead() {
+        //read dictionary from jar into memory
+        try {
+            System.out.println("Reading built-in wordlist into memory; This may take a few moments.");
+
+        } catch (IOException e) {
+            System.out.println("Error encountered while reading built-in wordlist.");
+            error();
+        }
+    }
+
+
 
     /**
      * Read in the dictionary file into an array.
