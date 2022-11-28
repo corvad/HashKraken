@@ -1,6 +1,8 @@
 import java.io.*;
+import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Hashtable;
 import java.util.concurrent.CountDownLatch;
@@ -8,6 +10,9 @@ import java.util.concurrent.CountDownLatch;
 public class Hash {
     private String path;
     protected String hash;
+    protected boolean dictionary;
+    protected boolean brute;
+    protected int numberBrute;
     private int threads;
     protected String[] possible;
     protected CountDownLatch finished;
@@ -18,17 +23,19 @@ public class Hash {
      * @param hash Hash to Crack
      * @param threads Number of Threads
      * @param path Path to Wordlist
-     * @param dictionary
-     * @param brute
+     * @param dictionary True - use dictionary / False - no dictionary
+     * @param brute True - use bruteforce / False - do not use bruteforce mode
+     * @param numberBrute Number of bruteforce entries to generate
      */
-    public Hash(String hash, int threads, String path, boolean dictionary, boolean brute) {
+    public Hash(String hash, int threads, String path, boolean dictionary, boolean brute, int numberBrute) {
         this.path = path;
         this.threads = threads;
         this.hash = hash;
+        this.dictionary = dictionary;
+        this.brute = brute;
+        this.numberBrute = numberBrute;
         finished = new CountDownLatch(threads);
         found = false;
-        brute = true;
-
         if(brute){
             genBruteList();
         }
@@ -40,35 +47,32 @@ public class Hash {
     }
 
     /**
-     * Read in the dictionary file into an array.
+     * Generate bruteforce words into an array
      */
     private void genBruteList() {
-        //read dictionary into memory
-        try {
-            System.out.println("Reading dictionary into memory; This may take a few moments.");
-            possible = Files.readAllLines(Paths.get(path), StandardCharsets.ISO_8859_1).toArray(new String[0]);
-        } catch (IOException e) {
-            System.out.println("Error encountered while reading wordlist.");
-            error();
-        }
+        //generate bruteforce words into an array
+        System.out.println("Generating bruteforce word list; This may take a few moments.");
+        
     }
 
     /**
-     * Read in the dictionary file into an array.
+     * Read in the built-in wordlist into an array.
      */
-
     private void builtinRead() {
         //read dictionary from jar into memory
         try {
             System.out.println("Reading built-in wordlist into memory; This may take a few moments.");
-
+            try {
+                possible = Files.readAllLines(Path.of(getClass().getResource("/Top-10-Million.txt").toURI()), StandardCharsets.ISO_8859_1).toArray(new String[0]);
+            } catch (URISyntaxException e) {
+                System.out.println("Error encountered while reading built-in wordlist.");
+                error();
+            }
         } catch (IOException e) {
             System.out.println("Error encountered while reading built-in wordlist.");
             error();
         }
     }
-
-
 
     /**
      * Read in the dictionary file into an array.
