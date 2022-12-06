@@ -10,10 +10,13 @@ public class SHA256Hash extends Hash {
      * @param hash SHA-256 Hash to Crack
      * @param threads Number of Threads
      * @param path Path to Wordlist
+     * @param dictionary True - use dictionary / False - no dictionary
+     * @param brute True - use bruteforce / False - do not use bruteforce mode
+     * @param numberBrute Number of bruteforce entries to generate
      */
-    public SHA256Hash(String hash, int threads, String path) {
+    public SHA256Hash(String hash, int threads, String path, boolean dictionary, boolean brute, int numberBrute) {
         //call parent class constructor
-        super(hash, threads, path);
+        super(hash, threads, path, dictionary, brute, numberBrute);
     }
 
     /**

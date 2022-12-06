@@ -30,7 +30,7 @@ public class HashKraken {
             }
         }
         */
-        BcryptHash a = new BcryptHash("$2a$10$iGIqucEhd5qw8RJi7fCcGuPGM2YVgES1csC2AGfqHmXF4oLizrzv2", 8, "C:\\Users\\100031399\\Downloads\\HashKraken\\src\\Top-10-Million.txt");
+        BcryptHash a = new BcryptHash("$2a$10$iGIqucEhd5qw8RJi7fCcGuPGM2YVgES1csC2AGfqHmXF4oLizrzv2", 8, "",false,false,0);
         a.start();
     }
 }

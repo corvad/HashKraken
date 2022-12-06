@@ -9,10 +9,13 @@ public class BcryptHash extends Hash {
      * @param hash Bcrypt Hash to Crack
      * @param threads Number of Threads
      * @param path Path to Wordlist
+     * @param dictionary True - use dictionary / False - no dictionary
+     * @param brute True - use bruteforce / False - do not use bruteforce mode
+     * @param numberBrute Number of bruteforce entries to generate
      */
-    public BcryptHash(String hash, int threads, String path) {
+    public BcryptHash(String hash, int threads, String path, boolean dictionary, boolean brute, int numberBrute) {
         //call parent class constructor
-        super(hash, threads, path);
+        super(hash, threads, path, dictionary, brute, numberBrute);
     }
 
     /**
@@ -63,10 +66,6 @@ public class BcryptHash extends Hash {
      */
     public static boolean checkHash(String hash) {
         //verify Bcrypt hash length and format
-        hash = hash.toUpperCase();
-        Pattern pattern = Pattern.compile("^\\$2[ayb]\\$.{56}$");
-        Matcher matcher = M
-
+        return Pattern.matches("^\\$2[ayb]\\$.{56}$", hash);
     }
-
 }
