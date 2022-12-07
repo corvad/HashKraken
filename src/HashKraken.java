@@ -30,7 +30,7 @@ public class HashKraken {
             }
         }
         */
-        BcryptHash a = new BcryptHash("$2a$10$iGIqucEhd5qw8RJi7fCcGuPGM2YVgES1csC2AGfqHmXF4oLizrzv2", 8, "",false,false,0);
+        MD5Hash a = new MD5Hash("161bcd8552b9944d9bbf3e9b05961881", 8, "",false,false,0);
         a.start();
     }
 }
