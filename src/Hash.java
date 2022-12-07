@@ -4,6 +4,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.concurrent.CountDownLatch;
 
@@ -52,7 +53,6 @@ public class Hash {
     private void genBruteList() {
         //generate bruteforce words into an array
         System.out.println("Generating bruteforce word list; This may take a few moments.");
-        
     }
 
     /**
@@ -61,16 +61,18 @@ public class Hash {
     private void builtinRead() {
         //read dictionary from jar into memory
         try {
-            System.out.println("Reading built-in wordlist into memory; This may take a few moments.");
-            try {
-                possible = Files.readAllLines(Path.of(getClass().getResource("/Top-10-Million.txt").toURI()), StandardCharsets.ISO_8859_1).toArray(new String[0]);
-            } catch (URISyntaxException e) {
-                System.out.println("Error encountered while reading built-in wordlist.");
-                error();
+            System.out.println("Reading dictionary into memory; This may take a few moments.");
+            InputStream stream = getClass().getResourceAsStream("Top-10-Million.txt");
+            assert stream != null;
+            BufferedReader file = new BufferedReader(new InputStreamReader(stream, StandardCharsets.ISO_8859_1));
+            ArrayList<String> temp = new ArrayList<>();
+            while (file.readLine() != null) {
+                temp.add(file.readLine());
             }
-        } catch (IOException e) {
-            System.out.println("Error encountered while reading built-in wordlist.");
-            error();
+            possible = temp.toArray(new String[0]);
+        }
+        catch(IOException e){
+            System.out.println("Error Reading File from Jar.");
         }
     }
 
