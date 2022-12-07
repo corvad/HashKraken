@@ -30,7 +30,7 @@ public class HashKraken {
             }
         }
         */
-        MD5Hash a = new MD5Hash("161bcd8552b9944d9bbf3e9b05961881", 8, "",false,false,0);
+        MD5Hash a = new MD5Hash("482c811da5d5b4bc6d497ffa98491e38", 8, "",false,false,0);
         a.start();
     }
 }
