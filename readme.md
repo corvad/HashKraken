@@ -24,7 +24,7 @@
 ## Usage:
 `java.exe -jar HashKraken.jar [Hashing Algorithm] [Hash] [Threads]`
 - Required Arguments: [Hashing Algorithm] [Hash] [Threads]
-    - Hash Algorithm: Algorithm to use for hashing. Can be "md5", "sha256", "bcrypt."
+    - Hash Algorithm: Algorithm to use for hashing. Can be "md5", "sha256", or "bcrypt."
     - Hash: Hash to match to plaintext password (must be of the same algorithm provided in first argument).
     - Number of Threads: The number of threads to use when running the program (recommended not to go over the number of threads on your CPU).
 - Default Mode Uses Top 10 Million Wordlist Bundled
