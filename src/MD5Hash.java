@@ -17,6 +17,7 @@ public class MD5Hash extends Hash {
     public MD5Hash(String hash, int threads, String path, boolean dictionary, boolean brute, int numberBrute) {
         //call parent class constructor
         super(hash, threads, path, dictionary, brute, numberBrute);
+        hash = hash.toLowerCase();
     }
 
     /**

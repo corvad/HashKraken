@@ -66,8 +66,9 @@ public class Hash {
             assert stream != null;
             BufferedReader file = new BufferedReader(new InputStreamReader(stream, StandardCharsets.ISO_8859_1));
             ArrayList<String> temp = new ArrayList<>();
-            while (file.readLine() != null) {
-                temp.add(file.readLine());
+            String templine;
+            while ((templine = file.readLine()) != null) {
+                temp.add(templine);
             }
             possible = temp.toArray(new String[0]);
         }
