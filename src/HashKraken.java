@@ -4,7 +4,7 @@ public class HashKraken {
     public static void main(String[] args) {
 
         //help message
-        String helpMessage = "HashKraken - David Corvaglia © 2022\n  Required Arguments: [Hashing Algorithm] [Hash] [Threads]\n  Additional Optional Arguments: -p/--path [Wordlist Path]\n  -b/--bruteforce [Number of Bruteforce Combinations]";
+        String helpMessage = "HashKraken - David Corvaglia 2022\n  Required Arguments: [Hashing Algorithm] [Hash] [Threads]\n  Default Uses Top 10 Million Wordlist Bundled\n  Additional Optional Arguments:\n    -p/--path [Wordlist Path]\n    OR\n    -b/--bruteforce [Number of Bruteforce Combinations]";
 
         //algorithm to use
         String algorithm = null;
