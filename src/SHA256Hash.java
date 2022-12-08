@@ -3,11 +3,14 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HexFormat;
 
+/**
+ * SHA256 hashing class inheriting off Hash class
+ */
 public class SHA256Hash extends Hash {
 
     /**
      * Constructor for the SHA256Hash Class.
-     * @param hash SHA-256 Hash to Crack
+     * @param hash SHA256 Hash to Crack
      * @param threads Number of Threads
      * @param path Path to Wordlist
      * @param dictionary True - use dictionary / False - no dictionary
@@ -17,11 +20,12 @@ public class SHA256Hash extends Hash {
     public SHA256Hash(String hash, int threads, String path, boolean dictionary, boolean brute, int numberBrute) {
         //call parent class constructor
         super(hash, threads, path, dictionary, brute, numberBrute);
+        //lowercase hash
         hash = hash.toLowerCase();
     }
 
     /**
-     * Method to calculate SHA-256 Hash with concurrency.
+     * Method to calculate SHA256 Hash with concurrency.
      * @param min Min Index Present in Sub-Array Section
      * @param max Max Index Present in Sub-Array Section
      */
@@ -30,7 +34,7 @@ public class SHA256Hash extends Hash {
         boolean twentyfive = false;
         boolean fifty = false;
         boolean seventyfive = false;
-        //loop through Sub-Array
+        //loop through sub-array
         for (int x = min; x <= max && !found; x++) {
             //save current percent
             int percent = (int) (((x - (min * 1.0)) / (max - min)) * 100);
@@ -58,6 +62,7 @@ public class SHA256Hash extends Hash {
             HexFormat SHA256Hex = HexFormat.of();
             String SHA256Hash = SHA256Hex.formatHex(SHA256Bytes);
             if (SHA256Hash.equals(hash)) {
+                //password found
                 System.out.println("Found Password: " + possible[x]);
                 found = true;
                 stop();
@@ -71,12 +76,12 @@ public class SHA256Hash extends Hash {
     }
 
     /**
-     * Static method to validate the hash style for SHA-256.
-     * @param hash SHA-256 Hash to check.
-     * @return Validity of the SHA-256 Hash.
+     * Static method to validate the hash style for SHA256.
+     * @param hash SHA256 Hash to check.
+     * @return Validity of the SHA256 Hash.
      */
     public static boolean checkHash(String hash) {
-        //verify SHA-256 hash length and format
+        //verify SHA256 hash length and format
         hash = hash.toUpperCase();
         if (hash.length() != 64) {
             return false;

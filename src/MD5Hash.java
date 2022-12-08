@@ -3,6 +3,9 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HexFormat;
 
+/**
+ * MD5 hashing class inheriting off Hash class
+ */
 public class MD5Hash extends Hash {
 
     /**
@@ -17,6 +20,7 @@ public class MD5Hash extends Hash {
     public MD5Hash(String hash, int threads, String path, boolean dictionary, boolean brute, int numberBrute) {
         //call parent class constructor
         super(hash, threads, path, dictionary, brute, numberBrute);
+        //lowercase hash
         hash = hash.toLowerCase();
     }
 
@@ -30,7 +34,7 @@ public class MD5Hash extends Hash {
         boolean twentyfive = false;
         boolean fifty = false;
         boolean seventyfive = false;
-        //loop through Sub-Array
+        //loop through sub-array
         for (int x = min; x <= max && !found; x++) {
             //save current percent
             int percent = (int) (((x - (min * 1.0)) / (max - min)) * 100);
@@ -58,6 +62,7 @@ public class MD5Hash extends Hash {
             HexFormat MD5Hex = HexFormat.of();
             String MD5Hash = MD5Hex.formatHex(MD5Bytes);
             if (MD5Hash.equals(hash)) {
+                //password found
                 System.out.println("Found Password: " + possible[x]);
                 found = true;
                 stop();

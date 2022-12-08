@@ -1,6 +1,9 @@
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import java.util.regex.Pattern;
 
+/**
+ * Bcrypt hashing class inheriting off Hash class
+ */
 public class BcryptHash extends Hash {
 
     /**
@@ -27,7 +30,7 @@ public class BcryptHash extends Hash {
         boolean twentyfive = false;
         boolean fifty = false;
         boolean seventyfive = false;
-        //loop through Sub-Array
+        //loop through sub-array
         for (int x = min; x <= max && !found; x++) {
             //save current percent
             int percent = (int) (((x - (min * 1.0)) / (max - min)) * 100);
@@ -46,6 +49,7 @@ public class BcryptHash extends Hash {
             }
             //hash and compare
             if (BCrypt.checkpw(possible[x],hash)) {
+                //password found
                 System.out.println("Found Password: " + possible[x]);
                 found = true;
                 stop();

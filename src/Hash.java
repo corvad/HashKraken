@@ -5,6 +5,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
 
+/**
+ * Hash object for managing hashing threads and file io operations.
+ */
 public class Hash {
     private String path;
     protected String hash;
@@ -34,6 +37,7 @@ public class Hash {
         this.numberBrute = numberBrute;
         finished = new CountDownLatch(threads);
         found = false;
+        //do respective operation for respective mode
         if(brute){
             genBruteList();
         }
@@ -46,7 +50,7 @@ public class Hash {
         if(threads>possible.length){
             //return error and exit program because of too many threads
             System.out.println("Too many threads in comparison for the size of the possible passwords.");
-            System.exit(1);
+            error();
         }
     }
 
@@ -76,7 +80,9 @@ public class Hash {
             possible = temp.toArray(new String[0]);
         }
         catch(IOException e){
+            //return error and exit program because of error reading from Jar
             System.out.println("Error Reading File from Jar.");
+            error();
         }
     }
 
@@ -98,8 +104,8 @@ public class Hash {
      * Splits array and starts the hashing process.
      */
     public void start() {
-        //split array into multiple parts and start threads to hash
-        int max = possible.length - 1;
+        //split array into multiple parts (# of threads) and start threads to hash passwords
+        int max = possible.length;
         int lengths = max / threads;
         int indexMax = lengths;
         int indexMin = 0;
@@ -111,6 +117,7 @@ public class Hash {
             int finalIndexMin = indexMin;
             int finalIndexMax = indexMax;
             new Thread(() -> {
+                System.out.println(finalIndexMax);
                 hashAlgorithm(finalIndexMin, finalIndexMax);
             }).start();
         }

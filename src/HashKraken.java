@@ -1,5 +1,11 @@
+/**
+ * Runner Class for HashKraken
+ */
 public class HashKraken {
 
+    /**
+     * Parse CMD arguments and start hashing.
+     */
     //program starts here
     public static void main(String[] args) {
 
