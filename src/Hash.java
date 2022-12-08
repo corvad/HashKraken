@@ -45,6 +45,12 @@ public class Hash {
         }else{
             builtinRead();
         }
+        //check threads and array bounds
+        if(threads>possible.length){
+            //return error and exit program because of too many threads
+            System.out.println("Too many threads in comparison for the size of the possible passwords.");
+            System.exit(1);
+        }
     }
 
     /**
@@ -143,5 +149,4 @@ public class Hash {
     protected void hashAlgorithm(int finalIndexMin, int finalIndexMax) {
         hashAlgorithm(finalIndexMin, finalIndexMax);
     }
-
 }
