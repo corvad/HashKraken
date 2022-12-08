@@ -1,11 +1,8 @@
 import java.io.*;
-import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.concurrent.CountDownLatch;
 
 public class Hash {
@@ -67,7 +64,7 @@ public class Hash {
     private void builtinRead() {
         //read dictionary from jar into memory
         try {
-            System.out.println("Reading dictionary into memory; This may take a few moments.");
+            System.out.println("Reading built-in dictionary; This may take a few moments.");
             InputStream stream = getClass().getResourceAsStream("Top-10-Million.txt");
             assert stream != null;
             BufferedReader file = new BufferedReader(new InputStreamReader(stream, StandardCharsets.ISO_8859_1));

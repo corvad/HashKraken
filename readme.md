@@ -1,20 +1,12 @@
 # HashKraken
 ## By: David Corvaglia
 ### A password cracker written in Java (JDK 17 LTS)
-## Supported Alogrithms:
-- MD1
-- MD2
+## Supported Algorithms:
 - MD5
-- SHA1
-- SHA2
-- SHA3
 - SHA256
-- SHA512
-- scrypt
-- scrypt
-- yescrypt
+- bcrypt
 ## Features:
-- Mutithreading
+- Multithreading
 - CLI
 - Written in Java
 - Top 10 Million Passwords Built In

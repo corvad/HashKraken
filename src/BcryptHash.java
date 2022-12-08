@@ -1,5 +1,4 @@
 import org.springframework.security.crypto.bcrypt.BCrypt;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class BcryptHash extends Hash {
