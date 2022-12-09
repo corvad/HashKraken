@@ -15,11 +15,11 @@ public class MD5Hash extends Hash {
      * @param path Path to Wordlist
      * @param dictionary True - use dictionary / False - no dictionary
      * @param brute True - use bruteforce / False - do not use bruteforce mode
-     * @param numberBrute Number of bruteforce entries to generate
+     * @param lengthBrute Max length of bruteforce entries to generate
      */
-    public MD5Hash(String hash, int threads, String path, boolean dictionary, boolean brute, int numberBrute) {
+    public MD5Hash(String hash, int threads, String path, boolean dictionary, boolean brute, int lengthBrute) {
         //call parent class constructor
-        super(hash, threads, path, dictionary, brute, numberBrute);
+        super(hash, threads, path, dictionary, brute, lengthBrute);
         //lowercase hash
         hash = hash.toLowerCase();
     }

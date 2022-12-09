@@ -13,7 +13,7 @@ public class Hash {
     protected String hash;
     protected boolean dictionary;
     protected boolean brute;
-    protected int numberBrute;
+    protected int lengthBrute;
     private int threads;
     protected String[] possible;
     protected CountDownLatch finished;
@@ -26,15 +26,15 @@ public class Hash {
      * @param path Path to Wordlist
      * @param dictionary True - use dictionary / False - no dictionary
      * @param brute True - use bruteforce / False - do not use bruteforce mode
-     * @param numberBrute Number of bruteforce entries to generate
+     * @param lengthBrute Max length of bruteforce entries to generate
      */
-    public Hash(String hash, int threads, String path, boolean dictionary, boolean brute, int numberBrute) {
+    public Hash(String hash, int threads, String path, boolean dictionary, boolean brute, int lengthBrute) {
         this.path = path;
         this.threads = threads;
         this.hash = hash;
         this.dictionary = dictionary;
         this.brute = brute;
-        this.numberBrute = numberBrute;
+        this.lengthBrute = lengthBrute;
         finished = new CountDownLatch(threads);
         found = false;
         //do respective operation for respective mode
@@ -45,6 +45,12 @@ public class Hash {
             fileRead();
         }else{
             builtinRead();
+        }
+        //check that length is not greater than 5
+        if(lengthBrute>5){
+            //return error and exit program because of bruteforce limitation
+            System.out.println("Bruteforce length is too long. (Sorry a limitation of Java's array size).");
+            error();
         }
         //check threads and array bounds
         if(threads>possible.length){
@@ -58,8 +64,10 @@ public class Hash {
      * Generate bruteforce words into an array
      */
     private void genBruteList() {
-        //generate bruteforce words into an array
-        System.out.println("Generating bruteforce word list; This may take a few moments.");
+        //generate bruteforce words and load into array in memory
+        System.out.println("Generating bruteforce wordlist; This may take a few moments.");
+        char[] alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUYWXYZ1234567890".toCharArray();
+
     }
 
     /**

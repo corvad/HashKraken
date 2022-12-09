@@ -10,7 +10,14 @@ public class HashKraken {
     public static void main(String[] args) {
 
         //help message
-        String helpMessage = "HashKraken - David Corvaglia 2022\n  Required Arguments: [Hashing Algorithm] [Hash] [Threads]\n  Default Mode Uses Top 10 Million Wordlist Bundled\n  Additional Optional Arguments:\n    -p/--path [Wordlist Path]\n    OR\n    -b/--bruteforce [Number of Bruteforce Combinations]";
+        String helpMessage = "HashKraken - David Corvaglia 2022\n" +
+                "  Documentation: github.com/corvad/HashKraken\n" +
+                "  Required Arguments: [Hashing Algorithm] [Hash] [Threads]\n" +
+                "  Default Mode Uses Top 10 Million Wordlist Bundled\n" +
+                "  Additional Optional Arguments:\n" +
+                "    -p/--path [Wordlist Path]\n" +
+                "    OR\n" +
+                "    -b/--bruteforce [Length of Max Combinations (Cannot be grater than 5)]";
 
         //algorithm to use
         String algorithm = null;
@@ -27,12 +34,16 @@ public class HashKraken {
         //path to file
         String path = "";
 
-        //bruteforce number combinations
-        int combos = 0;
+        //bruteforce length to gen
+        int length = 0;
 
         //check CMD arguments
         //if empty display help message
         if(args.length==0) {
+            //display help message
+            System.out.println(helpMessage);
+        }
+        else if(args.length==1 && (args[0].toLowerCase().equals("--help") || args[0].toLowerCase().equals("-h"))){
             //display help message
             System.out.println(helpMessage);
         }
@@ -103,12 +114,12 @@ public class HashKraken {
                 }
                 else if(args[3].toLowerCase().equals("-b") || args[3].toLowerCase().equals("--bruteforce")) {
                     mode = "bruteforce";
-                    //read integer for number of combinations
+                    //read integer for max length of bruteforce
                     try{
-                        combos = Integer.parseInt(args[4]);
+                        length = Integer.parseInt(args[4]);
                     }catch (NumberFormatException e) {
-                        //invalid combinations message and stop program execution
-                        System.out.println("Invalid number of bruteforce combinations.");
+                        //invalid length message and stop program execution
+                        System.out.println("Invalid max length of bruteforce combinations.");
                         System.exit(1);
                     }
                 }
@@ -122,13 +133,13 @@ public class HashKraken {
         //initialize respective hashing objects and start them
         if(algorithm != null){
             if(algorithm.equals("md5")){
-                (new MD5Hash(hash,threads,path,mode.equals("wordlist"),mode.equals("bruteforce"),combos)).start();
+                (new MD5Hash(hash,threads,path,mode.equals("wordlist"),mode.equals("bruteforce"),length)).start();
             }
             if(algorithm.equals("sha256")){
-                (new SHA256Hash(hash,threads,path,mode.equals("wordlist"),mode.equals("bruteforce"),combos)).start();
+                (new SHA256Hash(hash,threads,path,mode.equals("wordlist"),mode.equals("bruteforce"),length)).start();
             }
             if(algorithm.equals("bcrypt")){
-                (new BcryptHash(hash,threads,path,mode.equals("wordlist"),mode.equals("bruteforce"),combos)).start();
+                (new BcryptHash(hash,threads,path,mode.equals("wordlist"),mode.equals("bruteforce"),length)).start();
             }
         }
     }
