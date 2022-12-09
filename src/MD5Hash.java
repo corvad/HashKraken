@@ -25,54 +25,22 @@ public class MD5Hash extends Hash {
     }
 
     /**
-     * Method to calculate MD5 Hash with concurrency.
-     * @param min Min Index Present in Sub-Array Section
-     * @param max Max Index Present in Sub-Array Section
+     * Method to check MD5 Hash against plaintext hash.
+     * @param plaintext Password to Bcrypt Hash
+     * @return True if Plaintext Password Matches Existing Hash - False if Plaintext Password Does Not Match Existing Hash
      */
-    protected void hashAlgorithm(int min, int max) {
-        System.out.println(Thread.currentThread().getName() + " Started Hashing");
-        boolean twentyfive = false;
-        boolean fifty = false;
-        boolean seventyfive = false;
-        //loop through sub-array
-        for (int x = min; x <= max && !found; x++) {
-            //save current percent
-            int percent = (int) (((x - (min * 1.0)) / (max - min)) * 100);
-            //print progress
-            if(percent == 25 && !twentyfive){
-                twentyfive = true;
-                System.out.println(Thread.currentThread().getName() + " 25% Done Hashing");
-            }
-            if(percent == 50 && !fifty){
-                fifty = true;
-                System.out.println(Thread.currentThread().getName() + " 50% Done Hashing");
-            }
-            if(percent == 75 && !seventyfive){
-                seventyfive = true;
-                System.out.println(Thread.currentThread().getName() + " 75% Done Hashing");
-            }
-            //hash and compare
-            MessageDigest MD5;
-            try {
-                MD5 = MessageDigest.getInstance("MD5");
-            } catch (NoSuchAlgorithmException e) {
-                throw new RuntimeException(e);
-            }
-            byte[] MD5Bytes = MD5.digest(possible[x].getBytes(StandardCharsets.UTF_8));
-            HexFormat MD5Hex = HexFormat.of();
-            String MD5Hash = MD5Hex.formatHex(MD5Bytes);
-            if (MD5Hash.equals(hash)) {
-                //password found
-                System.out.println("Found Password: " + possible[x]);
-                found = true;
-                stop();
-            }
+    protected boolean checkHash(String plaintext){
+        //hash and compare
+        MessageDigest MD5;
+        try {
+            MD5 = MessageDigest.getInstance("MD5");
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
         }
-        //countdown once finished
-        finished.countDown();
-        if(!found){
-            System.out.println(Thread.currentThread().getName() + " Finished Hashing");
-        }
+        byte[] MD5Bytes = MD5.digest(plaintext.getBytes(StandardCharsets.UTF_8));
+        HexFormat MD5Hex = HexFormat.of();
+        String MD5Hash = MD5Hex.formatHex(MD5Bytes);
+        return MD5Hash.equals(hash);
     }
 
     /**
@@ -80,7 +48,7 @@ public class MD5Hash extends Hash {
      * @param hash MD5 Hash to check.
      * @return Validity of the MD5 Hash.
      */
-    public static boolean checkHash(String hash) {
+    public static boolean verifyHash(String hash) {
         //verify MD5 hash length and format
         hash = hash.toUpperCase();
         if (hash.length() != 32) {

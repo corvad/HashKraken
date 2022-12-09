@@ -9,23 +9,24 @@ import java.util.concurrent.CountDownLatch;
  * Hash object for managing hashing threads and file io operations.
  */
 public class Hash {
-    private String path;
-    protected String hash;
-    protected boolean dictionary;
-    protected boolean brute;
-    protected int lengthBrute;
-    private int threads;
+    protected final String path;
+    protected final String hash;
+    protected final boolean dictionary;
+    protected final boolean brute;
+    protected final int lengthBrute;
+    private final int threads;
     protected String[] possible;
     protected CountDownLatch finished;
     protected boolean found;
 
     /**
      * Constructor for the Hash Class.
-     * @param hash Hash to Crack
-     * @param threads Number of Threads
-     * @param path Path to Wordlist
-     * @param dictionary True - use dictionary / False - no dictionary
-     * @param brute True - use bruteforce / False - do not use bruteforce mode
+     *
+     * @param hash        Hash to Crack
+     * @param threads     Number of Threads
+     * @param path        Path to Wordlist
+     * @param dictionary  True - use dictionary / False - no dictionary
+     * @param brute       True - use bruteforce / False - do not use bruteforce mode
      * @param lengthBrute Max length of bruteforce entries to generate
      */
     public Hash(String hash, int threads, String path, boolean dictionary, boolean brute, int lengthBrute) {
@@ -38,22 +39,20 @@ public class Hash {
         finished = new CountDownLatch(threads);
         found = false;
         //do respective operation for respective mode
-        if(brute){
+        if (brute && lengthBrute <= 5) {
             genBruteList();
-        }
-        else if(dictionary){
+        } else if (dictionary) {
             fileRead();
-        }else{
+        } else {
             builtinRead();
         }
         //check that length is not greater than 5
-        if(lengthBrute>5){
-            //return error and exit program because of bruteforce limitation
-            System.out.println("Bruteforce length is too long. (Sorry a limitation of Java's array size).");
-            error();
+        if (lengthBrute > 5) {
+            //return warning
+            System.out.println("Warning: Program will run on single thread for bruteforce grater than 5 characters.");
         }
         //check threads and array bounds
-        if(threads>possible.length){
+        if (threads > possible.length) {
             //return error and exit program because of too many threads
             System.out.println("Too many threads in comparison for the size of the possible passwords.");
             error();
@@ -61,7 +60,7 @@ public class Hash {
     }
 
     /**
-     * Generate bruteforce words into an array
+     * Generate bruteforce words into an array.
      */
     private void genBruteList() {
         //generate bruteforce words and load into array in memory
@@ -86,8 +85,7 @@ public class Hash {
                 temp.add(templine);
             }
             possible = temp.toArray(new String[0]);
-        }
-        catch(IOException e){
+        } catch (IOException e) {
             //return error and exit program because of error reading from Jar
             System.out.println("Error Reading File from Jar.");
             error();
@@ -126,7 +124,7 @@ public class Hash {
             int finalIndexMax = indexMax;
             new Thread(() -> {
                 System.out.println(finalIndexMax);
-                hashAlgorithm(finalIndexMin, finalIndexMax);
+                hashThread(finalIndexMin, finalIndexMax);
             }).start();
         }
         try {
@@ -154,11 +152,53 @@ public class Hash {
     }
 
     /**
-     * Method to call hashAlgorithm() in child class.
-     * @param finalIndexMin Min Index Present in Sub-Array Section
-     * @param finalIndexMax Max Index Present in Sub-Array Section
+     * Method to call checkHash() in child class.
+     * @param plaintext Password to Hash in Child Class
+     * @return True if Plaintext Password Matches Existing Hash - False if Plaintext Password Does Not Match Existing Hash
      */
-    protected void hashAlgorithm(int finalIndexMin, int finalIndexMax) {
-        hashAlgorithm(finalIndexMin, finalIndexMax);
+    protected boolean checkHash(String plaintext){
+        return checkHash(plaintext);
+    }
+
+    /**
+     * Method to calculate Hashes with concurrency.
+     * @param min Min Index Present in Sub-Array Section
+     * @param max Max Index Present in Sub-Array Section
+     */
+    protected void hashThread(int min, int max) {
+        System.out.println(Thread.currentThread().getName() + " Started Hashing");
+        boolean twentyfive = false;
+        boolean fifty = false;
+        boolean seventyfive = false;
+        //loop through sub-array
+        for (int x = min; x <= max && !found; x++) {
+            //save current percent
+            int percent = (int) (((x - (min * 1.0)) / (max - min)) * 100);
+            //print progress
+            if(percent == 25 && !twentyfive){
+                twentyfive = true;
+                System.out.println(Thread.currentThread().getName() + " 25% Done Hashing");
+            }
+            if(percent == 50 && !fifty){
+                fifty = true;
+                System.out.println(Thread.currentThread().getName() + " 50% Done Hashing");
+            }
+            if(percent == 75 && !seventyfive){
+                seventyfive = true;
+                System.out.println(Thread.currentThread().getName() + " 75% Done Hashing");
+            }
+            //hash and compare
+            if (checkHash(possible[x])) {
+                //password found
+                System.out.println("Found Password: " + possible[x]);
+                found = true;
+                stop();
+            }
+        }
+        //countdown once finished
+        finished.countDown();
+        if(!found){
+            System.out.println(Thread.currentThread().getName() + " Finished Hashing");
+        }
     }
 }

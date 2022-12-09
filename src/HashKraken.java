@@ -60,17 +60,17 @@ public class HashKraken {
             }
             //look for hash and check hash
             if(args.length >= 2){
-                if((MD5Hash.checkHash(args[1]) || SHA256Hash.checkHash(args[1]) || BcryptHash.checkHash(args[1]))) {
+                if((MD5Hash.verifyHash(args[1]) || SHA256Hash.verifyHash(args[1]) || BcryptHash.verifyHash(args[1]))) {
                     //set algorithm
-                    if(MD5Hash.checkHash(args[1]) && algorithm.equals("md5")) {
+                    if(MD5Hash.verifyHash(args[1]) && algorithm.equals("md5")) {
                         //set hash
                         hash = args[1];
                     }
-                    else if(SHA256Hash.checkHash(args[1]) && algorithm.equals("sha256")){
+                    else if(SHA256Hash.verifyHash(args[1]) && algorithm.equals("sha256")){
                         //set hash
                         hash = args[1];
                     }
-                    else if(BcryptHash.checkHash(args[1]) && algorithm.equals("bcrypt")){
+                    else if(BcryptHash.verifyHash(args[1]) && algorithm.equals("bcrypt")){
                         //set hash
                         hash = args[1];
                     }

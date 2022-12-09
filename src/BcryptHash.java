@@ -21,45 +21,13 @@ public class BcryptHash extends Hash {
     }
 
     /**
-     * Method to calculate Bcrypt Hash with concurrency.
-     * @param min Min Index Present in Sub-Array Section
-     * @param max Max Index Present in Sub-Array Section
+     * Method to check Bcrypt Hash against plaintext hash.
+     * @param plaintext Password to Bcrypt Hash
+     * @return True if Plaintext Password Matches Existing Hash - False if Plaintext Password Does Not Match Existing Hash
      */
-    protected void hashAlgorithm(int min, int max) {
-        System.out.println(Thread.currentThread().getName() + " Started Hashing");
-        boolean twentyfive = false;
-        boolean fifty = false;
-        boolean seventyfive = false;
-        //loop through sub-array
-        for (int x = min; x <= max && !found; x++) {
-            //save current percent
-            int percent = (int) (((x - (min * 1.0)) / (max - min)) * 100);
-            //print progress
-            if(percent == 25 && !twentyfive){
-                twentyfive = true;
-                System.out.println(Thread.currentThread().getName() + " 25% Done Hashing");
-            }
-            if(percent == 50 && !fifty){
-                fifty = true;
-                System.out.println(Thread.currentThread().getName() + " 50% Done Hashing");
-            }
-            if(percent == 75 && !seventyfive){
-                seventyfive = true;
-                System.out.println(Thread.currentThread().getName() + " 75% Done Hashing");
-            }
-            //hash and compare
-            if (BCrypt.checkpw(possible[x],hash)) {
-                //password found
-                System.out.println("Found Password: " + possible[x]);
-                found = true;
-                stop();
-            }
-        }
-        //countdown once finished
-        finished.countDown();
-        if(!found){
-            System.out.println(Thread.currentThread().getName() + " Finished Hashing");
-        }
+    protected boolean checkHash(String plaintext){
+        //hash and compare
+        return BCrypt.checkpw(plaintext,hash);
     }
 
     /**
@@ -67,7 +35,7 @@ public class BcryptHash extends Hash {
      * @param hash Bcrypt Hash to check.
      * @return Validity of the Bcrypt Hash.
      */
-    public static boolean checkHash(String hash) {
+    public static boolean verifyHash(String hash) {
         //verify Bcrypt hash length and format
         return Pattern.matches("^\\$2[ayb]\\$.{56}$", hash);
     }

@@ -25,54 +25,22 @@ public class SHA256Hash extends Hash {
     }
 
     /**
-     * Method to calculate SHA256 Hash with concurrency.
-     * @param min Min Index Present in Sub-Array Section
-     * @param max Max Index Present in Sub-Array Section
+     * Method to check SHA256 Hash against plaintext hash.
+     * @param plaintext Password to Bcrypt Hash
+     * @return True if Plaintext Password Matches Existing Hash - False if Plaintext Password Does Not Match Existing Hash
      */
-    protected void hashAlgorithm(int min, int max) {
-        System.out.println(Thread.currentThread().getName() + " Started Hashing");
-        boolean twentyfive = false;
-        boolean fifty = false;
-        boolean seventyfive = false;
-        //loop through sub-array
-        for (int x = min; x <= max && !found; x++) {
-            //save current percent
-            int percent = (int) (((x - (min * 1.0)) / (max - min)) * 100);
-            //print progress
-            if(percent == 25 && !twentyfive){
-                twentyfive = true;
-                System.out.println(Thread.currentThread().getName() + " 25% Done Hashing");
-            }
-            if(percent == 50 && !fifty){
-                fifty = true;
-                System.out.println(Thread.currentThread().getName() + " 50% Done Hashing");
-            }
-            if(percent == 75 && !seventyfive){
-                seventyfive = true;
-                System.out.println(Thread.currentThread().getName() + " 75% Done Hashing");
-            }
-            //hash and compare
-            MessageDigest SHA256;
-            try {
-                SHA256 = MessageDigest.getInstance("SHA-256");
-            } catch (NoSuchAlgorithmException e) {
-                throw new RuntimeException(e);
-            }
-            byte[] SHA256Bytes = SHA256.digest(possible[x].getBytes(StandardCharsets.UTF_8));
-            HexFormat SHA256Hex = HexFormat.of();
-            String SHA256Hash = SHA256Hex.formatHex(SHA256Bytes);
-            if (SHA256Hash.equals(hash)) {
-                //password found
-                System.out.println("Found Password: " + possible[x]);
-                found = true;
-                stop();
-            }
+    protected boolean checkHash(String plaintext){
+        //hash and compare
+        MessageDigest SHA256;
+        try {
+            SHA256 = MessageDigest.getInstance("SHA-256");
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
         }
-        //countdown once finished
-        finished.countDown();
-        if(!found){
-            System.out.println(Thread.currentThread().getName() + " Finished Hashing");
-        }
+        byte[] SHA256Bytes = SHA256.digest(plaintext.getBytes(StandardCharsets.UTF_8));
+        HexFormat SHA256Hex = HexFormat.of();
+        String SHA256Hash = SHA256Hex.formatHex(SHA256Bytes);
+        return SHA256Hash.equals(hash);
     }
 
     /**
@@ -80,7 +48,7 @@ public class SHA256Hash extends Hash {
      * @param hash SHA256 Hash to check.
      * @return Validity of the SHA256 Hash.
      */
-    public static boolean checkHash(String hash) {
+    public static boolean verifyHash(String hash) {
         //verify SHA256 hash length and format
         hash = hash.toUpperCase();
         if (hash.length() != 64) {
