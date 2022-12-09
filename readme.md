@@ -32,15 +32,19 @@
     - -p/--path [Wordlist Path]
         - If provided it will run in wordlist mode with the path provided.
     - **OR**
-    -  -b/--bruteforce [Number of Bruteforce Combinations]
-        - If provided it will run in bruteforce mode with the number of bruteforce combinations provided.
+    -  -b/--bruteforce [Length of Max Combinations To Try (If greater than 5, will only run one thread)]
+        - If provided it will run in bruteforce mode with the length of combinations to try provided.
+        - If bruteforce length is less than or equal to 5 characters then it will run multithreaded.
+        - If bruteforce length is greater than 5 characters then it will run single threaded.
 ## Example Usage:
 1. `java.exe -jar HashKraken.jar md5 482c811da5d5b4bc6d497ffa98491e38 8`
     - Runs HashKraken using the built-in wordlist with MD5, a hash of 482c811da5d5b4bc6d497ffa98491e38, and running with 8 threads.
 2.  `java.exe -jar HashKraken.jar md5 482c811da5d5b4bc6d497ffa98491e38 8 -p wordlist.txt`
     - Runs HashKraken using wordlist.txt as a dictionary with MD5, a hash of 482c811da5d5b4bc6d497ffa98491e38, and running with 8 threads.
-3. `java.exe -jar HashKraken.jar md5 482c811da5d5b4bc6d497ffa98491e38 8 -b 2000000`
-    - Runs HashKraken using bruteforce mode with 2000000 possible combinations with MD5, a hash of 482c811da5d5b4bc6d497ffa98491e38, and running with 8 threads.
+3. `java.exe -jar HashKraken.jar md5 482c811da5d5b4bc6d497ffa98491e38 8 -b 4`
+    - Runs HashKraken using bruteforce mode with bruteforce length of 4 with MD5, a hash of 482c811da5d5b4bc6d497ffa98491e38, and running with 8 threads.
+4. `java.exe -jar HashKraken.jar md5 482c811da5d5b4bc6d497ffa98491e38 1 -b 6`
+    - Runs HashKraken using bruteforce mode with bruteforce length of 6 with MD5, a hash of 482c811da5d5b4bc6d497ffa98491e38, and running with 1 thread.
 # Building the Jar in Intellij Idea
 1. Open the project in Intellij Idea with [Amazon Corretto 17](https://docs.aws.amazon.com/corretto/latest/corretto-17-ug/downloads-list.ht) installed and configured as the JDK for the project.
 2. Select the build menu and select build artifacts.

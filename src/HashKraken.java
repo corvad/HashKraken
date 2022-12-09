@@ -17,7 +17,7 @@ public class HashKraken {
                 "  Additional Optional Arguments:\n" +
                 "    -p/--path [Wordlist Path]\n" +
                 "    OR\n" +
-                "    -b/--bruteforce [Length of Max Combinations (Cannot be grater than 5)]";
+                "    -b/--bruteforce [Length of Max Combinations To Try (If greater than 5, will only run one thread)]";
 
         //algorithm to use
         String algorithm = null;

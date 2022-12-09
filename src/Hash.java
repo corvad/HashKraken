@@ -49,7 +49,7 @@ public class Hash {
         //check that length is not greater than 5
         if (lengthBrute > 5) {
             //return warning
-            System.out.println("Warning: Program will run on single thread for bruteforce grater than 5 characters.");
+            System.out.println("Warning: Program will run on single thread for bruteforce grater than 5 characters, ignoring provided threads argument.");
         }
         //check threads and array bounds
         if (threads > possible.length) {
