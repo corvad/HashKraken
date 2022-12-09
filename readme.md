@@ -1,7 +1,7 @@
 
 # HashKraken
 ## Created By: David Corvaglia 2022
-### A multithreaded password cracker written in Java (JDK 17 LTS)
+### A multithreaded password cracker written in Java (JDK 17 LTS).
 ## Supported Algorithms:
 - MD5
 - SHA256
