@@ -10,7 +10,7 @@
 - Multithreading (Built-In or Dictionary/Wordlist)
 - CLI
 - Written in Java
-- Top 10 Million Passwords Built In
+- Top 10 Million Passwords Built-In
 - Ability to Add a Custom Wordlist or Dictionary
 - Brute Force Password Cracking (Single Thread)
 - Cross Platform
