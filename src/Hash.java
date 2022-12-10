@@ -50,7 +50,7 @@ public class Hash {
             System.out.println("Warning: Please be aware that bruteforce mode will only use one thread no matter how many provided.");
         }
         //check threads and array bounds
-        if (threads > possible.length) {
+        if ((possible!=null) && (threads > possible.length)) {
             //return error and exit program because of too many threads
             System.out.println("Too many threads in comparison for the size of the possible passwords.");
             error();
@@ -98,9 +98,13 @@ public class Hash {
      * Method to start bruteforce.
      */
     public void startBruteforce(){
+        System.out.println("Started Hashing");
         //for loop to run through lengths to generate
-        for (int x = 1;x < lengthBrute;x++){
+        for (int x = 1;x <= lengthBrute;x++){
             computeBruteforce("",x);
+        }
+        if(!found){
+            System.out.println("No Password Found!");
         }
     }
 
@@ -115,13 +119,14 @@ public class Hash {
         if (l == 0) {
             //check hash
             if(checkHash(plaintext)){
+                found = true;
                 System.out.println("Found Password: " + plaintext);
                 stop();
             }
         } else {
             //spin off recursive call(s) to make another combination and check it
-            for (int a = 0; a < bruteforce.length;a++) {
-                computeBruteforce(plaintext+bruteforce[a],l-1);
+            for (char c : bruteforce) {
+                computeBruteforce(plaintext + c, l - 1);
             }
         }
     }
@@ -157,7 +162,6 @@ public class Hash {
             int finalIndexMin = indexMin;
             int finalIndexMax = indexMax;
             new Thread(() -> {
-                System.out.println(finalIndexMax);
                 hashThread(finalIndexMin, finalIndexMax);
             }).start();
         }
@@ -201,28 +205,10 @@ public class Hash {
      */
     protected void hashThread(int min, int max) {
         System.out.println(Thread.currentThread().getName() + " Started Hashing");
-        boolean twentyfive = false;
-        boolean fifty = false;
-        boolean seventyfive = false;
         //loop through sub-array
         for (int x = min; x <= max && !found; x++) {
-            //save current percent
-            int percent = (int) (((x - (min * 1.0)) / (max - min)) * 100);
-            //print progress
-            if(percent == 25 && !twentyfive){
-                twentyfive = true;
-                System.out.println(Thread.currentThread().getName() + " 25% Done Hashing");
-            }
-            if(percent == 50 && !fifty){
-                fifty = true;
-                System.out.println(Thread.currentThread().getName() + " 50% Done Hashing");
-            }
-            if(percent == 75 && !seventyfive){
-                seventyfive = true;
-                System.out.println(Thread.currentThread().getName() + " 75% Done Hashing");
-            }
             //hash and compare
-            if (checkHash(possible[x])) {
+            if(checkHash(possible[x])){
                 //password found
                 System.out.println("Found Password: " + possible[x]);
                 found = true;

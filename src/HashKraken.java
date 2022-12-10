@@ -13,11 +13,17 @@ public class HashKraken {
         String helpMessage = "HashKraken - David Corvaglia 2022\n" +
                 "  Documentation: github.com/corvad/HashKraken\n" +
                 "  Required Arguments: [Hashing Algorithm] [Hash] [Threads]\n" +
+                "    - Hashing Algorithm: Algorithm to use for hashing. Can be \"md5\", \"sha256\", or \"bcrypt.\"\n" +
+                "    - Hash: Hash to match to plaintext password (must be of the same algorithm provided in first argument).\n" +
+                "    - Threads: The number of threads to use when running the program (recommended not to go over the number of threads on your CPU).\n" +
                 "  Default Mode Uses Top 10 Million Wordlist Bundled\n" +
                 "  Additional Optional Arguments:\n" +
-                "    -p/--path [Wordlist Path]\n" +
-                "    OR\n" +
-                "    -b/--bruteforce [Length of Max Combinations To Try (Will Only Use One Thread)]";
+                "    - -p/--path [Wordlist Path]\n" +
+                "        - If provided it will run in wordlist mode with the path provided.\n" +
+                "    **OR**\n" +
+                "    -  -b/--bruteforce [Max Character Length of Combinations To Try (Will Only Use One Thread)]\n" +
+                "        - If provided it will run in bruteforce mode until the max length of characters provided.\n" +
+                "        - Bruteforce mode will always run single threaded.";
 
         //algorithm to use
         String algorithm = null;
