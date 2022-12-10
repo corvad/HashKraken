@@ -157,7 +157,12 @@ public class Hash {
         for (int x = 0; x < threads; x++) {
             if (x != 0) {
                 indexMin = indexMax + 1;
-                indexMax += lengths;
+                if(x == threads-1){
+                    indexMax = max-1;
+                }
+                else{
+                    indexMax += lengths;
+                }
             }
             int finalIndexMin = indexMin;
             int finalIndexMax = indexMax;
