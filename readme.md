@@ -7,7 +7,7 @@
 - SHA256
 - Bcrypt
 ## Features:
-- Multithreading (Built In or Dictionary)
+- Multithreading (Built-In or Dictionary/Wordlist)
 - CLI
 - Written in Java
 - Top 10 Million Passwords Built In
