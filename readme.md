@@ -15,10 +15,10 @@
 - Brute Force Password Cracking (Single Thread)
 - Cross Platform
 ## Dependencies
-- Java JDK 17 LTS  (Tested with [Amazon Corretto 17](https://docs.aws.amazon.com/corretto/latest/corretto-17-ug/downloads-list.ht))
+- Java JDK 17 LTS  (Tested with [Amazon Corretto 17](https://docs.aws.amazon.com/corretto/latest/corretto-17-ug/downloads-list.html))
 - Maven: [Spring Framework Security Crypto](https://mvnrepository.com/artifact/org.springframework.security/spring-security-crypto)
 ## Setup:
-1. Download JDK 17 (Recommend JDK is [Amazon Corretto 17](https://docs.aws.amazon.com/corretto/latest/corretto-17-ug/downloads-list.ht))
+1. Download JDK 17 (Recommend JDK is [Amazon Corretto 17](https://docs.aws.amazon.com/corretto/latest/corretto-17-ug/downloads-list.html))
 2. Download HashKraken.jar from the [Releases](https://github.com/corvad/HashKraken/releases) section.
 ## Usage:
 `java.exe -jar HashKraken.jar [Hashing Algorithm] [Hash] [Threads]`
@@ -43,7 +43,7 @@
 3. `java.exe -jar HashKraken.jar md5 482c811da5d5b4bc6d497ffa98491e38 1 -b 4`
     - Runs HashKraken using bruteforce mode with bruteforce character length of 4 with MD5, a hash of 482c811da5d5b4bc6d497ffa98491e38, and running with 1 thread.
 # Building the Jar in Intellij Idea
-1. Open the project in Intellij Idea with [Amazon Corretto 17](https://docs.aws.amazon.com/corretto/latest/corretto-17-ug/downloads-list.ht) installed and configured as the JDK for the project.
+1. Open the project in Intellij Idea with [Amazon Corretto 17](https://docs.aws.amazon.com/corretto/latest/corretto-17-ug/downloads-list.html) installed and configured as the JDK for the project.
 2. Select the build menu and select build artifacts.
 3. Run the Build task.
 4. Jar will be output to /out/artifacts/HashKraken_jar/HashKraken.jar
