@@ -45,6 +45,10 @@ public class Hash {
         }else if(!brute){
             builtinRead();
         }
+        //warn that bruteforce uses one thread
+        if (brute && (threads!=1)){
+            System.out.println("Warning: Please be aware that bruteforce mode will only use one thread no matter how many provided.");
+        }
         //check threads and array bounds
         if (threads > possible.length) {
             //return error and exit program because of too many threads
