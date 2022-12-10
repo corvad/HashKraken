@@ -35,6 +35,7 @@
     -  -b/--bruteforce [Length of Max Combinations To Try (Will Only Use One Thread)]
         - If provided it will run in bruteforce mode with the length of combinations to try provided.
         - Bruteforce mode will always run single threaded.
+- Note: Java.exe may be the wrong version depending on your computer, in this case make sure to navigate to the right java.exe of version 17.
 ## Example Usage:
 1. `java.exe -jar HashKraken.jar md5 482c811da5d5b4bc6d497ffa98491e38 8`
     - Runs HashKraken using the built-in wordlist with MD5, a hash of 482c811da5d5b4bc6d497ffa98491e38, and running with 8 threads.
