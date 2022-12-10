@@ -7,14 +7,14 @@
 - SHA256
 - Bcrypt
 ## Features:
-- Multithreading
+- Multithreading (Built In or Dictionary)
 - CLI
 - Written in Java
 - Top 10 Million Passwords Built In
 - Ability to Add a Custom Wordlist or Dictionary
-- Brute Force Password Cracking
+- Brute Force Password Cracking (Single Thread)
 - Cross Platform
-- Progress Printing at 25%, 50%, and 75%
+- Progress Printing at 25%, 50%, and 75% (Only on Multithreaded Mode)
 ## Dependencies
 - Java JDK 17 LTS  (Tested with [Amazon Corretto 17](https://docs.aws.amazon.com/corretto/latest/corretto-17-ug/downloads-list.ht))
 - Maven: [Spring Framework Security Crypto](https://mvnrepository.com/artifact/org.springframework.security/spring-security-crypto)
