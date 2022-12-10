@@ -18,6 +18,7 @@ public class Hash {
     protected String[] possible;
     protected CountDownLatch finished;
     protected boolean found;
+    protected final char[] bruteforce = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890".toCharArray();
 
     /**
      * Constructor for the Hash Class.
@@ -39,17 +40,10 @@ public class Hash {
         finished = new CountDownLatch(threads);
         found = false;
         //do respective operation for respective mode
-        if (brute && lengthBrute <= 5) {
-            genBruteList();
-        } else if (dictionary) {
+        if (dictionary) {
             fileRead();
-        } else {
+        }else if(!brute){
             builtinRead();
-        }
-        //check that length is not greater than 5
-        if (lengthBrute > 5) {
-            //return warning
-            System.out.println("Warning: Program will run on single thread for bruteforce grater than 5 characters, ignoring provided threads argument.");
         }
         //check threads and array bounds
         if (threads > possible.length) {
@@ -57,16 +51,6 @@ public class Hash {
             System.out.println("Too many threads in comparison for the size of the possible passwords.");
             error();
         }
-    }
-
-    /**
-     * Generate bruteforce words into an array.
-     */
-    private void genBruteList() {
-        //generate bruteforce words and load into array in memory
-        System.out.println("Generating bruteforce wordlist; This may take a few moments.");
-        char[] alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUYWXYZ1234567890".toCharArray();
-
     }
 
     /**
@@ -107,10 +91,56 @@ public class Hash {
     }
 
     /**
-     * Splits array and starts the hashing process.
+     * Method to start bruteforce.
+     */
+    public void startBruteforce(){
+        //for loop to run through lengths to generate
+        for (int x = 1;x < lengthBrute;x++){
+            computeBruteforce("",x);
+        }
+    }
+
+    /**
+     * Method to compute bruteforce combinations and hash them.
+     * @param plaintext Plaintext of String
+     * @param l Length in Recursion
+     */
+    public void computeBruteforce(String plaintext,int l)
+    {
+        //break condition everytime a new password is made
+        if (l == 0) {
+            //check hash
+            if(checkHash(plaintext)){
+                System.out.println("Found Password: " + plaintext);
+                stop();
+            }
+        } else {
+            //spin off recursive call(s) to make another combination and check it
+            for (int a = 0; a < bruteforce.length;a++) {
+                computeBruteforce(plaintext+bruteforce[a],l-1);
+            }
+        }
+    }
+
+    /**
+     * Method to start the hashing process.
      */
     public void start() {
-        //split array into multiple parts (# of threads) and start threads to hash passwords
+        //bruteforce means single thread
+        if(brute) {
+            //start hashing for bruteforce
+            startBruteforce();
+        }
+        //hash using array in memory and multiple threads
+        else{
+            startMultithreading();
+        }
+    }
+
+    /**
+     * Method to start multithreaded hashing process.
+     */
+    public void startMultithreading() {
         int max = possible.length;
         int lengths = max / threads;
         int indexMax = lengths;
