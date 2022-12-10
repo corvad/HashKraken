@@ -85,7 +85,6 @@ public class HashKraken {
                         System.out.println("Hash does not match algorithm.");
                         System.exit(1);
                     }
-                    hash = args[1].toLowerCase();
                 }else{
                     //invalid hash message and stop program execution
                     System.out.println("Invalid hash.");

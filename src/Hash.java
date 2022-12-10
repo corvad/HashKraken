@@ -150,14 +150,14 @@ public class Hash {
      * Method to start multithreaded hashing process.
      */
     public void startMultithreading() {
-        int max = possible.length;
+        int max = possible.length ;
         int lengths = max / threads;
         int indexMax = lengths;
         int indexMin = 0;
         for (int x = 0; x < threads; x++) {
             if (x != 0) {
+                indexMin = indexMax + 1;
                 indexMax += lengths;
-                indexMin += lengths + 1;
             }
             int finalIndexMin = indexMin;
             int finalIndexMax = indexMax;
