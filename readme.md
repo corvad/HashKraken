@@ -49,4 +49,4 @@
 4. Jar will be output to /out/artifacts/HashKraken_jar/HashKraken.jar
 
 # License:
-## MIT License
+### MIT License
