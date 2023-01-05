@@ -49,4 +49,4 @@
 4. Jar will be output to /out/artifacts/HashKraken_jar/HashKraken.jar
 
 # License:
-### MIT License [Click here to see the license](https://github.com/corvad/HashKraken/blob/main/license.md)
+### GNU License [Click here to see the license](https://github.com/corvad/HashKraken/blob/main/license.md)
