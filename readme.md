@@ -47,3 +47,6 @@
 2. Select the build menu and select build artifacts.
 3. Run the Build task.
 4. Jar will be output to /out/artifacts/HashKraken_jar/HashKraken.jar
+
+# License:
+## MIT License
